@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://hbg2rldkl01c"]
+
+[ext_resource type="Texture2D" uid="uid://okcdyr6okf7v" path="res://extra_character_a.png" id="1_cm4ek"]
+
+[node name="Element" type="VBoxContainer"]
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_cm4ek")
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Text"
