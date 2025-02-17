@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://dux8tspun16w3"]
+[gd_scene load_steps=5 format=3 uid="uid://dux8tspun16w3"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_8hosr"]
-[ext_resource type="Texture2D" uid="uid://0pxidahjy4st" path="res://icon.svg" id="2_21cd5"]
+[ext_resource type="Texture2D" uid="uid://okcdyr6okf7v" path="res://extra_character_a.png" id="2_i8wye"]
+[ext_resource type="Texture2D" uid="uid://d35f7uibwhb50" path="res://extra_character_d.png" id="3_8rrpw"]
+[ext_resource type="Texture2D" uid="uid://p23htq5cbpor" path="res://extra_character_b.png" id="4_y84st"]
 
-[node name="Main" type="Control" node_paths=PackedStringArray("winner_label", "image")]
+[node name="Main" type="Control" node_paths=PackedStringArray("winner_label", "image", "image3", "image2")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,16 +14,35 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8hosr")
 winner_label = NodePath("WinnerLabel")
-image = NodePath("TextureRect")
+image = NodePath("HBoxContainer/TextureRect")
+image3 = NodePath("HBoxContainer/TextureRect2")
+image2 = NodePath("HBoxContainer/TextureRect3")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_21cd5")
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("2_i8wye")
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_y84st")
+stretch_mode = 5
+
+[node name="TextureRect3" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_8rrpw")
 stretch_mode = 5
 
 [node name="WinnerLabel" type="Label" parent="."]
