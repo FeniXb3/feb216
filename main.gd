@@ -1,15 +1,11 @@
 extends Control
 
 @export var winner_label: Label
-@export var image: TextureRect
-@export var image3: TextureRect
-@export var image2: TextureRect
+@export var winning_id: int
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	image.hide()
-	image3.hide()
-	image2.hide()
+	winning_id = randi_range(1, 3)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -19,6 +15,8 @@ func _process(delta: float) -> void:
 
 func _on_button_pressed() -> void:
 	winner_label.text = "NAJLEPSZE LO"
-	image.show()
-	image3.show()
-	image2.show()
+
+
+func _on_element_chosen(id) -> void:
+	if id == winning_id:
+		winner_label.text = "Wybrano element %d" % id

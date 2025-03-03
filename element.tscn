@@ -1,9 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://hbg2rldkl01c"]
+[gd_scene load_steps=3 format=3 uid="uid://hbg2rldkl01c"]
 
 [ext_resource type="Texture2D" uid="uid://okcdyr6okf7v" path="res://extra_character_a.png" id="1_cm4ek"]
+[ext_resource type="Script" path="res://element.gd" id="1_q1287"]
 
-[node name="Element" type="VBoxContainer"]
+[node name="Element" type="VBoxContainer" node_paths=PackedStringArray("image")]
 size_flags_horizontal = 3
+script = ExtResource("1_q1287")
+image = NodePath("TextureRect")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 2
@@ -16,3 +19,5 @@ stretch_mode = 5
 layout_mode = 2
 size_flags_vertical = 3
 text = "Text"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

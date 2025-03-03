@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://main.gd" id="1_8hosr"]
 [ext_resource type="PackedScene" uid="uid://hbg2rldkl01c" path="res://element.tscn" id="2_2oirr"]
 
-[node name="Main" type="Control" node_paths=PackedStringArray("winner_label", "image", "image3", "image2")]
+[node name="Main" type="Control" node_paths=PackedStringArray("winner_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,9 +12,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8hosr")
 winner_label = NodePath("WinnerLabel")
-image = NodePath("")
-image3 = NodePath("")
-image2 = NodePath("")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -27,12 +24,15 @@ alignment = 1
 
 [node name="Element" parent="HBoxContainer" instance=ExtResource("2_2oirr")]
 layout_mode = 2
+id = 1
 
 [node name="Element2" parent="HBoxContainer" instance=ExtResource("2_2oirr")]
 layout_mode = 2
+id = 2
 
 [node name="Element3" parent="HBoxContainer" instance=ExtResource("2_2oirr")]
 layout_mode = 2
+id = 3
 
 [node name="WinnerLabel" type="Label" parent="."]
 layout_mode = 1
@@ -65,4 +65,7 @@ grow_horizontal = 2
 grow_vertical = 0
 text = "Zmień napis"
 
+[connection signal="chosen" from="HBoxContainer/Element" to="." method="_on_element_chosen"]
+[connection signal="chosen" from="HBoxContainer/Element2" to="." method="_on_element_chosen"]
+[connection signal="chosen" from="HBoxContainer/Element3" to="." method="_on_element_chosen"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
