@@ -1,9 +1,36 @@
-[gd_scene load_steps=3 format=3 uid="uid://dux8tspun16w3"]
+[gd_scene load_steps=8 format=3 uid="uid://dux8tspun16w3"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_8hosr"]
 [ext_resource type="PackedScene" uid="uid://hbg2rldkl01c" path="res://element.tscn" id="2_2oirr"]
 
-[node name="Main" type="Control" node_paths=PackedStringArray("winner_label")]
+[sub_resource type="Curve" id="Curve_bad5j"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.2, 0.491103), 0.0, 0.0, 0, 0, Vector2(0.507143, 0.855427), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_gno1l"]
+curve = SubResource("Curve_bad5j")
+
+[sub_resource type="Gradient" id="Gradient_g6j31"]
+colors = PackedColorArray(0, 0.709804, 0.772549, 1, 1, 0.298039, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_dvhy2"]
+gradient = SubResource("Gradient_g6j31")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v82va"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 128.0
+spread = 180.0
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = 163.52
+gravity = Vector3(0, 98, 0)
+scale_max = 12.9
+color_ramp = SubResource("GradientTexture1D_dvhy2")
+alpha_curve = SubResource("CurveTexture_gno1l")
+hue_variation_min = -0.8
+hue_variation_max = 0.46
+
+[node name="Main" type="Control" node_paths=PackedStringArray("winner_label", "emitter")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,6 +39,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8hosr")
 winner_label = NodePath("WinnerLabel")
+emitter = NodePath("WinnerLabel/Control/GPUParticles2D")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -35,6 +63,7 @@ layout_mode = 2
 id = 3
 
 [node name="WinnerLabel" type="Label" parent="."]
+z_index = 1
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -50,6 +79,29 @@ grow_vertical = 2
 theme_override_colors/font_color = Color(0.72549, 0, 0, 1)
 theme_override_font_sizes/font_size = 100
 text = "31 LO"
+
+[node name="Control" type="Control" parent="WinnerLabel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -0.5
+offset_right = 0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="WinnerLabel/Control"]
+z_index = -1
+emitting = false
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_v82va")
+one_shot = true
+explosiveness = 0.5
+randomness = 0.38
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 1
