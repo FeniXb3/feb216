@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://hbg2rldkl01c"]
 
 [ext_resource type="Texture2D" uid="uid://okcdyr6okf7v" path="res://extra_character_a.png" id="1_cm4ek"]
-[ext_resource type="Script" path="res://element.gd" id="1_q1287"]
+[ext_resource type="Script" uid="uid://br2rmkfuxyw5o" path="res://element.gd" id="1_q1287"]
 
 [node name="Element" type="VBoxContainer" node_paths=PackedStringArray("image")]
 size_flags_horizontal = 3

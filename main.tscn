@@ -1,6 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://dux8tspun16w3"]
+[gd_scene load_steps=13 format=3 uid="uid://dux8tspun16w3"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_8hosr"]
+[ext_resource type="Script" uid="uid://cumu04v0fup4h" path="res://main.gd" id="1_8hosr"]
 [ext_resource type="PackedScene" uid="uid://hbg2rldkl01c" path="res://element.tscn" id="2_2oirr"]
 
 [sub_resource type="Curve" id="Curve_bad5j"]
@@ -29,6 +29,28 @@ color_ramp = SubResource("GradientTexture1D_dvhy2")
 alpha_curve = SubResource("CurveTexture_gno1l")
 hue_variation_min = -0.8
 hue_variation_max = 0.46
+
+[sub_resource type="Gradient" id="Gradient_h3rdm"]
+colors = PackedColorArray(1, 0, 0, 1, 0.840558, 0.979732, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_v1jrd"]
+gradient = SubResource("Gradient_h3rdm")
+
+[sub_resource type="Curve" id="Curve_tktdc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.739769), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ol0gr"]
+curve = SubResource("Curve_tktdc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rdvug"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 25.5
+gravity = Vector3(0, -98, 0)
+scale_max = 7.29
+scale_curve = SubResource("CurveTexture_ol0gr")
+color_ramp = SubResource("GradientTexture1D_v1jrd")
 
 [node name="Main" type="Control" node_paths=PackedStringArray("winner_label", "emitter")]
 layout_mode = 3
@@ -98,10 +120,15 @@ grow_vertical = 2
 z_index = -1
 emitting = false
 amount = 50
-process_material = SubResource("ParticleProcessMaterial_v82va")
 one_shot = true
 explosiveness = 0.5
 randomness = 0.38
+process_material = SubResource("ParticleProcessMaterial_v82va")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="WinnerLabel/Control"]
+emitting = false
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_rdvug")
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 1
