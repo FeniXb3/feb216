@@ -1,12 +1,45 @@
-[gd_scene load_steps=3 format=3 uid="uid://o44t01wn705v"]
+[gd_scene load_steps=5 format=3 uid="uid://o44t01wn705v"]
 
 [ext_resource type="PackedScene" uid="uid://tj56kxykuo16" path="res://brick.tscn" id="1_3jmfh"]
 [ext_resource type="PackedScene" uid="uid://b61ho50p1051q" path="res://floor.tscn" id="2_ydgdq"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_3jmfh"]
+radius = 20.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3jmfh"]
+size = Vector2(512, 20)
+
 [node name="PhysicsPlayground" type="Node2D"]
 
 [node name="Brick" parent="." instance=ExtResource("1_3jmfh")]
-position = Vector2(595, 180)
+position = Vector2(423, 259)
+mass = 50.0
+
+[node name="Brick2" parent="." instance=ExtResource("1_3jmfh")]
+position = Vector2(821, 429)
 
 [node name="Floor" parent="." instance=ExtResource("2_ydgdq")]
 position = Vector2(613, 588)
+
+[node name="Swing" type="Node2D" parent="."]
+position = Vector2(620, 556)
+metadata/_edit_group_ = true
+
+[node name="Base" type="StaticBody2D" parent="Swing"]
+position = Vector2(0, -20)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Swing/Base"]
+shape = SubResource("CircleShape2D_3jmfh")
+
+[node name="Plank" type="RigidBody2D" parent="Swing"]
+position = Vector2(0, -50)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Swing/Plank"]
+shape = SubResource("RectangleShape2D_3jmfh")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="Swing"]
+position = Vector2(0, -40)
+node_a = NodePath("../Base")
+node_b = NodePath("../Plank")
