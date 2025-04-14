@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cunmfrj1sacbh"]
+[gd_scene load_steps=8 format=3 uid="uid://cunmfrj1sacbh"]
 
 [ext_resource type="Script" uid="uid://com7tpjyd6ud1" path="res://pinball.gd" id="1_vdxpe"]
+[ext_resource type="Script" uid="uid://comrcnqkqm0dq" path="res://ball.gd" id="2_e78sp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_voqyf"]
 size = Vector2(800, 50)
@@ -8,8 +9,11 @@ size = Vector2(800, 50)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vdxpe"]
 size = Vector2(50, 1200)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e78sp"]
+size = Vector2(50, 500)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_voqyf"]
-radius = 50.0
+radius = 25.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_e78sp"]
 
@@ -27,13 +31,11 @@ metadata/_edit_group_ = true
 shape = SubResource("RectangleShape2D_voqyf")
 
 [node name="BottomWall" type="StaticBody2D" parent="Walls"]
-visible = false
 position = Vector2(323, 1061)
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/BottomWall"]
 shape = SubResource("RectangleShape2D_voqyf")
-disabled = true
 
 [node name="LeftWall" type="StaticBody2D" parent="Walls"]
 position = Vector2(42, 626)
@@ -49,12 +51,22 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LeftWall2"]
 shape = SubResource("RectangleShape2D_vdxpe")
 
+[node name="LeftWall3" type="StaticBody2D" parent="Walls"]
+position = Vector2(471, 626)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LeftWall3"]
+position = Vector2(0, 232)
+shape = SubResource("RectangleShape2D_e78sp")
+
 [node name="Ball" type="RigidBody2D" parent="."]
-position = Vector2(295, 364)
+position = Vector2(540, 956)
 collision_layer = 2
+script = ExtResource("2_e78sp")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+position = Vector2(-11, 7)
 shape = SubResource("CircleShape2D_voqyf")
 
 [node name="Killzone" type="Area2D" parent="."]
