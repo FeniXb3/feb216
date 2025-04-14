@@ -13,8 +13,9 @@ radius = 50.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_e78sp"]
 
-[node name="Pinball" type="Node2D"]
+[node name="Pinball" type="Node2D" node_paths=PackedStringArray("restart_timer")]
 script = ExtResource("1_vdxpe")
+restart_timer = NodePath("RestartTimer")
 
 [node name="Walls" type="Node2D" parent="."]
 
@@ -64,4 +65,7 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
 shape = SubResource("WorldBoundaryShape2D_e78sp")
 
+[node name="RestartTimer" type="Timer" parent="."]
+
 [connection signal="body_entered" from="Killzone" to="." method="_on_killzone_body_entered"]
+[connection signal="timeout" from="RestartTimer" to="." method="_on_restart_timer_timeout"]
