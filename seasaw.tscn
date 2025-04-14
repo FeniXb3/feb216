@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://qejhr1bv88ji"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3jmfh"]
+radius = 20.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3jmfh"]
+size = Vector2(512, 20)
+
+[node name="Seasaw" type="Node2D"]
+metadata/_edit_group_ = true
+
+[node name="Base" type="StaticBody2D" parent="."]
+position = Vector2(0, -20)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Base"]
+shape = SubResource("CircleShape2D_3jmfh")
+
+[node name="Plank" type="RigidBody2D" parent="."]
+position = Vector2(0, -50)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Plank"]
+shape = SubResource("RectangleShape2D_3jmfh")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+position = Vector2(0, -40)
+node_a = NodePath("../Base")
+node_b = NodePath("../Plank")
