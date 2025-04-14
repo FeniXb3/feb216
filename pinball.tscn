@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cunmfrj1sacbh"]
+[gd_scene load_steps=9 format=3 uid="uid://cunmfrj1sacbh"]
 
 [ext_resource type="Script" uid="uid://com7tpjyd6ud1" path="res://pinball.gd" id="1_vdxpe"]
 [ext_resource type="Script" uid="uid://comrcnqkqm0dq" path="res://ball.gd" id="2_e78sp"]
@@ -17,9 +17,14 @@ radius = 25.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_e78sp"]
 
-[node name="Pinball" type="Node2D" node_paths=PackedStringArray("restart_timer")]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e78sp"]
+height = 100.0
+
+[node name="Pinball" type="Node2D" node_paths=PackedStringArray("restart_timer", "left_paddle", "right_paddle")]
 script = ExtResource("1_vdxpe")
 restart_timer = NodePath("RestartTimer")
+left_paddle = NodePath("LeftPaddle")
+right_paddle = NodePath("RightPaddle")
 
 [node name="Walls" type="Node2D" parent="."]
 
@@ -52,10 +57,19 @@ metadata/_edit_group_ = true
 shape = SubResource("RectangleShape2D_vdxpe")
 
 [node name="LeftWall3" type="StaticBody2D" parent="Walls"]
-position = Vector2(471, 626)
+position = Vector2(469, 758)
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LeftWall3"]
+position = Vector2(0, 232)
+shape = SubResource("RectangleShape2D_e78sp")
+
+[node name="LeftWall4" type="StaticBody2D" parent="Walls"]
+position = Vector2(450, 272)
+rotation = -0.293958
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/LeftWall4"]
 position = Vector2(0, 232)
 shape = SubResource("RectangleShape2D_e78sp")
 
@@ -78,6 +92,24 @@ metadata/_edit_group_ = true
 shape = SubResource("WorldBoundaryShape2D_e78sp")
 
 [node name="RestartTimer" type="Timer" parent="."]
+
+[node name="LeftPaddle" type="RigidBody2D" parent="."]
+position = Vector2(133, 944)
+gravity_scale = 0.0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftPaddle"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_e78sp")
+
+[node name="RightPaddle" type="RigidBody2D" parent="."]
+position = Vector2(391, 944)
+gravity_scale = 0.0
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightPaddle"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_e78sp")
 
 [connection signal="body_entered" from="Killzone" to="." method="_on_killzone_body_entered"]
 [connection signal="timeout" from="RestartTimer" to="." method="_on_restart_timer_timeout"]
