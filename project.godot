@@ -31,6 +31,10 @@ start_ball={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_4="Paddle Limiter"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
