@@ -5,7 +5,7 @@ extends Node2D
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_left"):
-		left_paddle.apply_torque_impulse(-5000)
+		left_paddle.apply_impulse(Vector2(0, -600))
 		
 	if event.is_action_pressed("ui_right"):
 		right_paddle.apply_torque_impulse(5000)
