@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://cunmfrj1sacbh"]
+[gd_scene load_steps=20 format=3 uid="uid://cunmfrj1sacbh"]
 
 [ext_resource type="Script" uid="uid://com7tpjyd6ud1" path="res://pinball.gd" id="1_vdxpe"]
 [ext_resource type="Script" uid="uid://comrcnqkqm0dq" path="res://ball.gd" id="2_e78sp"]
+[ext_resource type="PackedScene" uid="uid://ulmbv72r054l" path="res://bouncer.tscn" id="3_48gu3"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_e78sp"]
 
@@ -53,12 +54,6 @@ radius = 25.0
 height = 100.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e78sp"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_e78sp"]
-bounce = 1.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_48gu3"]
-radius = 30.0
 
 [node name="Pinball" type="Node2D" node_paths=PackedStringArray("restart_timer", "left_paddle", "right_paddle")]
 script = ExtResource("1_vdxpe")
@@ -227,29 +222,8 @@ metadata/_edit_group_ = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightPaddleAnchor/BottomLimiter"]
 shape = SubResource("CircleShape2D_e78sp")
 
-[node name="Bouncer" type="StaticBody2D" parent="."]
+[node name="Bouncer" parent="." instance=ExtResource("3_48gu3")]
 position = Vector2(177, 256)
-physics_material_override = SubResource("PhysicsMaterial_e78sp")
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bouncer"]
-shape = SubResource("CircleShape2D_48gu3")
-
-[node name="Bouncer2" type="StaticBody2D" parent="."]
-position = Vector2(337, 511)
-physics_material_override = SubResource("PhysicsMaterial_e78sp")
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bouncer2"]
-shape = SubResource("CircleShape2D_48gu3")
-
-[node name="Bouncer3" type="StaticBody2D" parent="."]
-position = Vector2(200, 615)
-physics_material_override = SubResource("PhysicsMaterial_e78sp")
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bouncer3"]
-shape = SubResource("CircleShape2D_48gu3")
 
 [connection signal="body_entered" from="Killzone" to="." method="_on_killzone_body_entered"]
 [connection signal="timeout" from="RestartTimer" to="." method="_on_restart_timer_timeout"]
