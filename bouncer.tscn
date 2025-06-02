@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://ulmbv72r054l"]
+[gd_scene load_steps=4 format=3 uid="uid://ulmbv72r054l"]
+
+[ext_resource type="Script" uid="uid://bfjf8gttfk7y3" path="res://bouncer.gd" id="1_38d00"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_e78sp"]
 bounce = 1.0
@@ -7,7 +9,9 @@ bounce = 1.0
 radius = 30.0
 
 [node name="Bouncer" type="StaticBody2D"]
+collision_layer = 17
 physics_material_override = SubResource("PhysicsMaterial_e78sp")
+script = ExtResource("1_38d00")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
